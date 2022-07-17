@@ -1,0 +1,1 @@
+export const SET_ADD_CLASS_MODAL = "SET_ADD_CLASS_MODAL";

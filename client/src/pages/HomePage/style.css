@@ -1,0 +1,178 @@
+.home-Page_Wrapper {
+  height: 100vh;
+  width: 100vw;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)),
+    url(src/image/bgHomePage.jpg);
+  background-size: cover;
+  background-position: center;
+}
+
+.wrapper-img {
+  height: 40%;
+  width: 100%;
+  overflow: hidden;
+}
+
+.table-img {
+  height: 100%;
+  width: 100%;
+  background-image: url(src/image/imgTable.jpg);
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+  transition: 0.2s;
+  object-fit: cover;
+}
+
+.table-discription {
+  width: 200px;
+}
+
+.TableElement:hover .table-img {
+  transform: scale(1.2);
+}
+
+.TableElementDescriptionH2 {
+  position: relative;
+}
+
+.TableElementDescriptionH2::before {
+  content: "";
+  height: 3px;
+  width: 1px;
+  background: #009688;
+  position: absolute;
+  left: 0;
+  bottom: -10px;
+  transition: 0.5s;
+}
+
+.TableElement:hover .TableElementDescription {
+  background-color: #fff;
+}
+
+.TableElement:hover
+  .TableElementDescription
+  .TableElementDescriptionH2::before {
+  width: 30%;
+}
+
+.TableElement:hover
+  .TableElementDescription
+  .TabelElementView
+  .ReadButtonTableElement {
+  fill: #262626;
+}
+
+.img-detail_info {
+  min-height: 100%;
+  width: 100%;
+  background-image: url(src/image/detailInfo.jpg);
+  background-size: cover;
+  background-position: center;
+  flex: 1;
+  transition: 0.2s;
+}
+
+.img-detail_info:hover {
+  transform: scale(1.2);
+}
+
+.img-detail-row {
+  min-height: 100%;
+  width: 100%;
+  background-image: url(src/image/detailImg.jpg);
+  background-size: cover;
+  background-position: center;
+  flex: 1;
+  transition: 0.2s;
+}
+
+.img-detail-row:hover {
+  transform: scale(1.2);
+}
+
+.img-ytb-player {
+  min-height: 100%;
+  min-width: 100%;
+  background-image: linear-gradient(
+      rgba(107, 100, 100, 0.75),
+      rgba(27, 25, 25, 0.75)
+    ),
+    url(src/image/ytbPlayerImg.jpg);
+  background-size: cover;
+  background-position: center;
+  flex: 1;
+  position: relative;
+}
+
+.YtbPlayVid:hover .img-ytb-player .PlayBnYtb {
+  animation: shake 0.7s;
+}
+
+@keyframes shake {
+  0% {
+    transform: translate(1px, 1px) rotate(0deg);
+  }
+  10% {
+    transform: translate(-1px, -2px) rotate(-1deg);
+  }
+  20% {
+    transform: translate(-3px, 0px) rotate(1deg);
+  }
+  30% {
+    transform: translate(3px, 2px) rotate(0deg);
+  }
+  40% {
+    transform: translate(1px, -1px) rotate(1deg);
+  }
+  50% {
+    transform: translate(-1px, 2px) rotate(-1deg);
+  }
+  60% {
+    transform: translate(-3px, 1px) rotate(0deg);
+  }
+  70% {
+    transform: translate(3px, 1px) rotate(-1deg);
+  }
+  80% {
+    transform: translate(-1px, -1px) rotate(1deg);
+  }
+  90% {
+    transform: translate(1px, 2px) rotate(0deg);
+  }
+  100% {
+    transform: translate(1px, -2px) rotate(-1deg);
+  }
+}
+
+.BtnYtbText::after {
+  content: "";
+  height: 3px;
+  width: 0;
+  background: #009688;
+  position: absolute;
+  left: 0;
+  bottom: -10px;
+  transition: 0.5s;
+}
+
+.YtbPlayVid:hover .img-ytb-player .PlayBnYtb .BtnYtbText {
+  color: #009688;
+}
+
+.YtbPlayVid:hover .img-ytb-player {
+  background-image: linear-gradient(
+      rgba(107, 100, 100, 0.65),
+      rgba(27, 25, 25, 0.65)
+    ),
+    url(src/image/ytbPlayerImg.jpg);
+}
+
+.YtbPlayVid:hover .img-ytb-player .PlayBnYtb .BtnYtbPlay {
+  fill: #009688;
+}
+
+.YtbPlayVid:hover .img-ytb-player .PlayBnYtb .BtnYtbText::after {
+  width: 100%;
+}
