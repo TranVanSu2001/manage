@@ -1,3 +1,9 @@
+//-------------CLASS----------
 export const SET_ADD_CLASS_MODAL = "SET_ADD_CLASS_MODAL";
 export const SET_EDIT_CLASS_MODAL = "SET_EDIT_CLASS_MODAL";
 export const SET_VIEW_CLASS_MODAL = "SET_VIEW_CLASS_MODAL";
+
+//--------------STUDENT---------
+export const SET_ADD_STUDENT_MODAL = "SET_ADD_STUDENT_MODAL";
+export const SET_EDIT_STUDENT_MODAL = "SET_EDIT_STUDENT_MODAL";
+export const SET_VIEW_STUDENT_MODAL = "SET_VIEW_STUDENT_MODAL";

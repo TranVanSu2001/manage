@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import Axios from "axios";
+import React from "react";
 import TableClass from "./TableClass";
 
 import { PlusOutlined } from "@ant-design/icons";
@@ -12,17 +11,12 @@ import {
 } from "./style";
 import ModalAddClass from "./Modal/ModalAddClass";
 
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import classAction from "~/redux/action/actionClass";
 
 const Class = () => {
-  //react hook
-  //modal
-  const [isModalVisible, setIsModalVisible] = useState(false);
-
   //redux
   const dispatch = useDispatch();
-  const classReducer = useSelector((state) => state.Class);
 
   const showModal = () => {
     dispatch(classAction.activeAddClassModal(true));

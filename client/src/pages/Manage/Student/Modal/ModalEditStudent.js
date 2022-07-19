@@ -4,43 +4,49 @@ import Axios from "axios";
 import { Modal, Form, Input, notification } from "antd";
 
 import { useSelector, useDispatch } from "react-redux";
-import classAction from "~/redux/action/actionClass";
+import studentAction from "~/redux/action/actionStudent";
 
-const ModalEditClass = (props) => {
-  //react hook
-  const infoClass = props.infoClass;
-  const oldId = infoClass.id;
+const ModalEditStudent = (props) => {
+  const infoStudent = props.infoStudent;
+  // console.log("infoStudent: " + infoStudent);
+
+  //state
+  const oldId = infoStudent.id;
   const [id, setId] = useState("");
   const [name, setName] = useState("");
-  const [numOfStu, setNumOfStu] = useState("");
+  const [age, setAge] = useState("");
+  const [email, setEmail] = useState("");
 
   useEffect(() => {
-    setId(infoClass.id);
-    setName(infoClass.name);
-    setNumOfStu(infoClass.numberOfStudent);
-  }, [infoClass]);
+    console.log("info: ", infoStudent);
+    setId(infoStudent.id);
+    setName(infoStudent.name);
+    setAge(infoStudent.age);
+    setEmail(infoStudent.email);
+  }, [infoStudent]);
 
   //redux
   const dispatch = useDispatch();
-  const classReducer = useSelector((state) => state.Class);
+  const studentReducer = useSelector((state) => state.Student);
 
   const handleOk = () => {
     //submit info class to backend
 
-    Axios.post("http://localhost:3001/class/editClass", {
+    Axios.post("http://localhost:3001/student/editStudent", {
       id: id,
       name: name,
-      numOfStu: numOfStu,
+      age: age,
+      email: email,
       oldId: oldId,
     });
-    dispatch(classAction.activeEditClassModal(false));
+    dispatch(studentAction.activeEditStudentModal(false));
     if (oldId != id) {
       noticationEditClassSuccess();
     }
   };
 
   const handleCancel = () => {
-    dispatch(classAction.activeEditClassModal(false));
+    dispatch(studentAction.activeEditStudentModal(false));
   };
 
   //show notication
@@ -53,8 +59,8 @@ const ModalEditClass = (props) => {
   };
   return (
     <Modal
-      title="Edit class"
-      visible={classReducer.activeEditModal}
+      title="Edit student"
+      visible={studentReducer.activeEditModal}
       onOk={handleOk}
       onCancel={handleCancel}
       okText={"Edit"}
@@ -79,7 +85,7 @@ const ModalEditClass = (props) => {
           rules={[
             {
               required: true,
-              message: "Please input ID class",
+              message: "Please input ID student",
             },
           ]}
         >
@@ -96,7 +102,7 @@ const ModalEditClass = (props) => {
           rules={[
             {
               required: true,
-              message: "Please input name class",
+              message: "Please input name student",
             },
           ]}
         >
@@ -109,20 +115,37 @@ const ModalEditClass = (props) => {
           />
         </Form.Item>
         <Form.Item
-          label="Number Student"
+          label="Age"
           rules={[
             {
               required: true,
-              message: "Please input number of student",
+              message: "Please input age of student",
             },
           ]}
         >
           <Input
             type="text"
             onChange={(e) => {
-              setNumOfStu(e.target.value);
+              setAge(e.target.value);
             }}
-            value={numOfStu}
+            value={age}
+          />
+        </Form.Item>
+        <Form.Item
+          label="Email"
+          rules={[
+            {
+              required: true,
+              message: "Please input email of student",
+            },
+          ]}
+        >
+          <Input
+            type="text"
+            onChange={(e) => {
+              setEmail(e.target.value);
+            }}
+            value={email}
           />
         </Form.Item>
       </Form>
@@ -130,4 +153,4 @@ const ModalEditClass = (props) => {
   );
 };
 
-export default ModalEditClass;
+export default ModalEditStudent;

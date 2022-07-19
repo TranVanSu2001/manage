@@ -7,9 +7,11 @@ export const ClassWrapper = styled.div`
 
 export const ClassTitle = styled.h1`
   font-size: 1.6rem;
-  color: red;
+  color: #173fd7;
   text-align: center;
-  margin: 0 auto;
+  margin: auto;
+  height: 3rem;
+  padding-top: 1rem;
 `;
 
 export const ClassContainer = styled.div``;

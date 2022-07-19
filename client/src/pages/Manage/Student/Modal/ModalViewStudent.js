@@ -4,28 +4,28 @@ import Axios from "axios";
 import { Modal, Form, Input } from "antd";
 
 import { useSelector, useDispatch } from "react-redux";
-import classAction from "~/redux/action/actionClass";
+import actionStudent from "~/redux/action/actionStudent";
 
-const ModalViewClass = (props) => {
+const ModalViewStudent = (props) => {
   //get info class to view
-  const infoClass = props.infoClass;
+  const infoStudent = props.infoStudent;
 
   //redux
   const dispatch = useDispatch();
-  const classReducer = useSelector((state) => state.Class);
+  const studentReducer = useSelector((state) => state.Student);
 
   const handleOk = () => {
-    dispatch(classAction.activeViewClassModal(false));
+    dispatch(actionStudent.activeViewStudentModal(false));
   };
 
   const handleCancel = () => {
-    dispatch(classAction.activeViewClassModal(false));
+    dispatch(actionStudent.activeViewStudentModal(false));
   };
 
   return (
     <Modal
-      title="View class"
-      visible={classReducer.activeViewModal}
+      title="View student"
+      visible={studentReducer.activeViewModal}
       onCancel={handleCancel}
       onOk={handleOk}
       cancelButtonProps={{ style: { display: "none" } }}
@@ -54,7 +54,7 @@ const ModalViewClass = (props) => {
             },
           ]}
         >
-          <Input type="text" value={infoClass.id} />
+          <Input type="text" value={infoStudent.id} />
         </Form.Item>
         <Form.Item
           label="Name"
@@ -65,10 +65,10 @@ const ModalViewClass = (props) => {
             },
           ]}
         >
-          <Input type="text" value={infoClass.name} />
+          <Input type="text" value={infoStudent.name} />
         </Form.Item>
         <Form.Item
-          label="Number Student"
+          label="Age"
           rules={[
             {
               required: true,
@@ -76,11 +76,22 @@ const ModalViewClass = (props) => {
             },
           ]}
         >
-          <Input type="text" value={infoClass.numberOfStudent} />
+          <Input type="text" value={infoStudent.age} />
+        </Form.Item>
+        <Form.Item
+          label="Email"
+          rules={[
+            {
+              required: true,
+              message: "Please input number of student",
+            },
+          ]}
+        >
+          <Input type="text" value={infoStudent.email} />
         </Form.Item>
       </Form>
     </Modal>
   );
 };
 
-export default ModalViewClass;
+export default ModalViewStudent;

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import TableStudent from "./TableStudent";
 
+//ant design
 import { PlusOutlined, UnorderedListOutlined } from "@ant-design/icons";
 import { Button, Modal } from "antd";
 import {
@@ -11,20 +12,29 @@ import {
   ButtonFunc,
 } from "./style";
 
+//redux
+import { useSelector, useDispatch } from "react-redux";
+import studentAction from "~/redux/action/actionStudent";
+
+import ModalAddStudent from "./Modal/ModalAddStudent";
+
 const Student = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
 
+  //redux
+  const dispatch = useDispatch();
+  const classReducer = useSelector((state) => state.Class);
+
   const showModal = () => {
-    setIsModalVisible(true);
-    console.log("123");
+    dispatch(studentAction.activeAddStudentModal(true));
   };
 
   const handleOk = () => {
-    setIsModalVisible(false);
+    dispatch(studentAction.activeAddStudentModal(false));
   };
 
   const handleCancel = () => {
-    setIsModalVisible(false);
+    dispatch(studentAction.activeAddStudentModal(false));
   };
 
   return (
@@ -39,19 +49,7 @@ const Student = () => {
         >
           Add
         </Button>
-        <Modal
-          title="Basic Modal"
-          visible={isModalVisible}
-          onOk={handleOk}
-          onCancel={handleCancel}
-        >
-          <p>Some contents...</p>
-          <p>Some contents...</p>
-          <p>Some contents...</p>
-        </Modal>
-        <Button type="primary" icon={<UnorderedListOutlined />}>
-          View
-        </Button>
+        <ModalAddStudent />
       </ButtonAction>
       <StudentContainer>
         <TableStudent />

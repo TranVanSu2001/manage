@@ -56,6 +56,7 @@ const ModalAddClass = () => {
       visible={classReducer.activeAddModal}
       onOk={handleOk}
       onCancel={handleCancel}
+      okText={"Add"}
     >
       <Form
         name="basic"
