@@ -128,10 +128,11 @@ app.post("/student/add", (req, res) => {
   const name = req.body.name;
   const age = req.body.age;
   const email = req.body.email;
+  const classID = req.body.classID;
 
   db.query(
-    "INSERT INTO student (id, name, age, email) values(?,?,?, ?)",
-    [id, name, age, email],
+    "INSERT INTO student (id, name, age, email,classID) values(?,?,?,?,?)",
+    [id, name, age, email, classID],
     (err, result) => {
       if (err) {
         console.log(err);

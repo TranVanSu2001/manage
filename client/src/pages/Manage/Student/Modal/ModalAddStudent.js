@@ -1,22 +1,36 @@
 import React, { useState } from "react";
 import Axios from "axios";
 
-import { Modal, Form, Input, notification } from "antd";
+//antd
+import { Modal, Form, Input, notification, Select } from "antd";
 
 import { useSelector, useDispatch } from "react-redux";
-import classAction from "~/redux/action/actionClass";
 import studentAction from "~/redux/action/actionStudent";
+import { useEffect } from "react";
 
 const ModalAddStudent = () => {
+  const { Option } = Select;
+
   //react hook
   const [id, setId] = useState("");
   const [name, setName] = useState("");
   const [age, setAge] = useState("");
   const [email, setEmail] = useState("");
+  const [classID, setClassID] = useState("");
+  const [listIdClass, setListIdClass] = useState([]);
 
   //redux
   const dispatch = useDispatch();
   const classReducer = useSelector((state) => state.Student);
+
+  useEffect(() => {
+    Axios.get("http://localhost:3001/class/getListId").then((data) => {
+      console.log("data", data.data);
+      setListIdClass(data.data);
+    });
+  }, []);
+
+  console.log("list id", listIdClass);
 
   const handleOk = () => {
     //submit info class to backend
@@ -26,11 +40,13 @@ const ModalAddStudent = () => {
       name: name,
       age: age,
       email: email,
+      classID: classID,
     });
     setId("");
     setName("");
     setAge(0);
     setEmail("");
+    setClassID("");
     dispatch(studentAction.activeAddStudentModal(false));
 
     var listID = [];
@@ -54,9 +70,15 @@ const ModalAddStudent = () => {
     });
   };
 
+  //select class to add
+  const handleChange = (value) => {
+    // console.log(`selected ${value}`);
+    setClassID(`${value}`);
+  };
+
   return (
     <Modal
-      title="Add class"
+      title="Add student"
       visible={classReducer.activeAddModal}
       onOk={handleOk}
       onCancel={handleCancel}
@@ -144,6 +166,28 @@ const ModalAddStudent = () => {
             }}
             value={email}
           />
+        </Form.Item>
+
+        <Form.Item label="Class">
+          <Select
+            defaultValue="Class"
+            style={{
+              width: 120,
+            }}
+            onChange={handleChange}
+          >
+            {/* <Option value="jack">Jack</Option>
+            <Option value="lucy">Lucy</Option>
+            <Option value="Yiminghe">yiminghe</Option> */}
+
+            {listIdClass.map((key, index) => {
+              return (
+                <Option value={key.id} key={key.id}>
+                  Class {key.id}
+                </Option>
+              );
+            })}
+          </Select>
         </Form.Item>
       </Form>
     </Modal>

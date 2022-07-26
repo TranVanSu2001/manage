@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Axios from "axios";
 
 //ant design
-import { Space, Table, Tag, Button } from "antd";
+import { Space, Table, Button } from "antd";
 import { message, Popconfirm } from "antd";
 
 import "antd/dist/antd.css";
@@ -12,15 +12,14 @@ import {
   UnorderedListOutlined,
 } from "@ant-design/icons";
 
-import { ButtonFunc } from "./style";
 import ModalEditStudent from "./Modal/ModalEditStudent";
 
 //redux
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import studentAction from "~/redux/action/actionStudent";
 import ModalViewStudent from "./Modal/ModalViewStudent";
 
-const { Column, ColumnGroup } = Table;
+const { Column } = Table;
 
 const TableClass = () => {
   //redux
@@ -44,6 +43,7 @@ const TableClass = () => {
       name: value.name,
       age: value.age,
       email: value.email,
+      classID: value.classID,
     });
   });
 
@@ -102,6 +102,7 @@ const TableClass = () => {
         <Column title="Name" dataIndex="name" key="name" />
         <Column title="Age" dataIndex="age" key="age" />
         <Column title="Email" dataIndex="email" key="email" />
+        <Column title="Class" dataIndex="classID" key="classID" />
         <Column
           title="Action"
           key="action"
