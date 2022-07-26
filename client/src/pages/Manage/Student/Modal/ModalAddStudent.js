@@ -44,7 +44,7 @@ const ModalAddStudent = () => {
     });
     setId("");
     setName("");
-    setAge(0);
+    setAge("");
     setEmail("");
     setClassID("");
     dispatch(studentAction.activeAddStudentModal(false));
@@ -170,7 +170,7 @@ const ModalAddStudent = () => {
 
         <Form.Item label="Class">
           <Select
-            defaultValue="Class"
+            defaultValue="Select"
             style={{
               width: 120,
             }}
