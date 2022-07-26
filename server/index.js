@@ -53,6 +53,22 @@ app.post("/class/getInfoById", (req, res) => {
   });
 });
 
+app.post("/class/getListStudentById", (req, res) => {
+  const idClass = req.body.idClass;
+  console.log(`SELECT * FROM student where id =  ${idClass}`);
+
+  db.query(
+    "SELECT * FROM student where classID = (?)",
+    [idClass],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      }
+      res.send(result);
+    }
+  );
+});
+
 app.post("/class/deleteClass", (req, res) => {
   const idDelete = req.body.idDelete;
 
@@ -110,6 +126,23 @@ app.post("/class/add", (req, res) => {
   );
 });
 
+app.post("/class/getListStudentById", (req, res) => {
+  const idClass = req.body.idClass;
+  console.log(`select * from student where class = ${idClass}`);
+
+  db.query(
+    "select * from student where classID = (?)",
+    [idClass],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log(result);
+      }
+    }
+  );
+});
+
 //-----------------------STUDENT--------------
 //get list student information
 app.get("/student/getStudent", (req, res) => {
@@ -129,10 +162,11 @@ app.post("/student/add", (req, res) => {
   const age = req.body.age;
   const email = req.body.email;
   const classID = req.body.classID;
+  const sex = req.body.sex;
 
   db.query(
-    "INSERT INTO student (id, name, age, email,classID) values(?,?,?,?,?)",
-    [id, name, age, email, classID],
+    "INSERT INTO student (id, name, age, email,classID,sex) values(?,?,?,?,?,?)",
+    [id, name, age, email, classID, sex],
     (err, result) => {
       if (err) {
         console.log(err);
@@ -162,10 +196,12 @@ app.post("/student/editStudent", (req, res) => {
   const age = req.body.age;
   const email = req.body.email;
   const oldId = req.body.oldId;
+  const classID = req.body.classID;
+  const sex = req.body.sex;
 
   db.query(
-    "UPDATE student set id = ?, name = ?, age = ?, email= ? where id = ?",
-    [id, name, age, email, oldId],
+    "UPDATE student set id = ?, name = ?, age = ?, email= ?, sex =?, classID = ?where id = ?",
+    [id, name, age, email, sex, classID, oldId],
     (err, result) => {
       if (err) {
         console.log(err);

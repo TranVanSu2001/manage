@@ -1,13 +1,18 @@
 //Layout
 
-import Class from "~/pages/ManageClass/Class";
-import Student from "~/pages/ManageStudent/Student";
-import Subject from "~/pages/ManageSubject/Subject";
+import Class from "~/pages/Manage/Class";
+import Student from "~/pages/Manage/Student";
+import Subject from "~/pages/Manage/Subject";
+import HomePage from "~/pages/HomePage";
 
 //public routes
 const publicRoutes = [
   {
     path: "/",
+    component: HomePage,
+  },
+  {
+    path: "/class",
     component: Class,
   },
   {

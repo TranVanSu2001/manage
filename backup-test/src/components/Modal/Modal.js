@@ -5,9 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import classAction from "~/redux/action/actionClass";
 
 const ModalClass = (props) => {
-  const { modalClassInfomation, modalTableClass } = props;
-
-  console.log("props: ", modalClassInfomation);
+  const { modalClassInfomation } = props;
 
   //redux
   const dispatch = useDispatch();
@@ -16,6 +14,7 @@ const ModalClass = (props) => {
   useEffect(() => {}, []);
 
   const handleOk = () => {
+    //submit info class to backend
     dispatch(classAction.activeAddClassModal(false));
   };
 
@@ -23,12 +22,9 @@ const ModalClass = (props) => {
     dispatch(classAction.activeAddClassModal(false));
   };
 
-  const infoModal =
-    modalClassInfomation === undefined ? modalTableClass : modalClassInfomation;
-
   return (
     <Modal
-      title={infoModal.title}
+      title={modalClassInfomation.title}
       visible={classReducer.activeAddModal}
       onOk={handleOk}
       onCancel={handleCancel}
@@ -48,17 +44,17 @@ const ModalClass = (props) => {
         // onFinishFailed={onFinishFailed}
         autoComplete="off"
       >
-        {infoModal.details.map((item, key) => (
+        {modalClassInfomation.details.map((item, index) => (
           <Form.Item
             label={item.label}
             name={item.name}
-            rules={[
-              {
-                required: false,
-                message: "Please input class id!",
-              },
-            ]}
-            key={item.label}
+            // rules={[
+            //   {
+            //     required: false,
+            //     message: `Please input class ${item.name}!`,
+            //   },
+            // ]}
+            key={index}
           >
             <Input />
           </Form.Item>

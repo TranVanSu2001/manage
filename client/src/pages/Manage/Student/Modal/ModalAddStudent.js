@@ -17,20 +17,20 @@ const ModalAddStudent = () => {
   const [age, setAge] = useState("");
   const [email, setEmail] = useState("");
   const [classID, setClassID] = useState("");
+  const [sex, setSex] = useState("Male");
   const [listIdClass, setListIdClass] = useState([]);
 
   //redux
   const dispatch = useDispatch();
-  const classReducer = useSelector((state) => state.Student);
+  const studentReducer = useSelector((state) => state.Student);
 
   useEffect(() => {
     Axios.get("http://localhost:3001/class/getListId").then((data) => {
-      console.log("data", data.data);
       setListIdClass(data.data);
     });
-  }, []);
+  }, [studentReducer.activeAddModal]);
 
-  console.log("list id", listIdClass);
+  const listSex = ["Male", "Female"];
 
   const handleOk = () => {
     //submit info class to backend
@@ -41,12 +41,14 @@ const ModalAddStudent = () => {
       age: age,
       email: email,
       classID: classID,
+      sex: sex,
     });
     setId("");
     setName("");
     setAge("");
     setEmail("");
     setClassID("");
+    setSex("");
     dispatch(studentAction.activeAddStudentModal(false));
 
     var listID = [];
@@ -76,10 +78,15 @@ const ModalAddStudent = () => {
     setClassID(`${value}`);
   };
 
+  const handleChangeSex = (value) => {
+    // console.log(`selected ${value}`);
+    setSex(`${value}`);
+  };
+
   return (
     <Modal
       title="Add student"
-      visible={classReducer.activeAddModal}
+      visible={studentReducer.activeAddModal}
       onOk={handleOk}
       onCancel={handleCancel}
       okText={"Add"}
@@ -184,6 +191,28 @@ const ModalAddStudent = () => {
               return (
                 <Option value={key.id} key={key.id}>
                   Class {key.id}
+                </Option>
+              );
+            })}
+          </Select>
+        </Form.Item>
+
+        <Form.Item label="Sex">
+          <Select
+            defaultValue="Male"
+            style={{
+              width: 120,
+            }}
+            onChange={handleChangeSex}
+          >
+            {/* <Option value="jack">Jack</Option>
+            <Option value="lucy">Lucy</Option>
+            <Option value="Yiminghe">yiminghe</Option> */}
+
+            {listSex.map((key, index) => {
+              return (
+                <Option value={key} key={key}>
+                  {key}
                 </Option>
               );
             })}
