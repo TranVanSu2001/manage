@@ -11,7 +11,6 @@ app.use(cors());
 app.use(express.json());
 
 app.get("/", (req, res) => {
-  console.log("dddddd");
   res.send("hello world");
 });
 
@@ -41,9 +40,9 @@ app.post("/class/postIdEdit", (req, res) => {
   );
 });
 
+//get infomation by id classs
 app.post("/class/getInfoById", (req, res) => {
   const idEdit = req.body.idEdit;
-  console.log(`select * from class ${idEdit}`);
 
   db.query("SELECT * FROM class where id = (?)", [idEdit], (err, result) => {
     if (err) {
@@ -53,6 +52,7 @@ app.post("/class/getInfoById", (req, res) => {
   });
 });
 
+//get list student by id class
 app.post("/class/getListStudentById", (req, res) => {
   const idClass = req.body.idClass;
   console.log(`SELECT * FROM student where id =  ${idClass}`);
@@ -69,6 +69,7 @@ app.post("/class/getListStudentById", (req, res) => {
   );
 });
 
+//delete class
 app.post("/class/deleteClass", (req, res) => {
   const idDelete = req.body.idDelete;
 
@@ -80,6 +81,7 @@ app.post("/class/deleteClass", (req, res) => {
   });
 });
 
+//edit infomation class
 app.post("/class/editClass", (req, res) => {
   const id = req.body.id;
   const name = req.body.name;
@@ -98,6 +100,7 @@ app.post("/class/editClass", (req, res) => {
   );
 });
 
+//get list id class
 app.get("/class/getListId", (req, res) => {
   db.query("select id from class", (err, result) => {
     if (err) {
@@ -108,6 +111,7 @@ app.get("/class/getListId", (req, res) => {
   });
 });
 
+//add class
 app.post("/class/add", (req, res) => {
   const id = req.body.id;
   const name = req.body.name;
@@ -126,6 +130,7 @@ app.post("/class/add", (req, res) => {
   );
 });
 
+//get list student by classID
 app.post("/class/getListStudentById", (req, res) => {
   const idClass = req.body.idClass;
   console.log(`select * from student where class = ${idClass}`);

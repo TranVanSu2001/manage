@@ -30,7 +30,6 @@ const TableViewStudentClass = (props) => {
 
   //redux
   const classReducer = useSelector((state) => state.Class);
-  const studentReducer = useSelector((state) => state.Student);
 
   infoStudentByIdClass.map((value, key) => {
     data.push({
@@ -57,7 +56,7 @@ const TableViewStudentClass = (props) => {
       title: "ID",
       dataIndex: "id",
       key: "id",
-      sorter: (a, b) => a.id - b.id,
+      sorter: (a, b) => a.name.length - b.name.length,
       sortOrder: sortedInfo.columnKey === "id" ? sortedInfo.order : null,
       ellipsis: true,
     },

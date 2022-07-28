@@ -18,20 +18,16 @@ import ModalEditStudent from "../Modal/ModalEditStudent";
 import { useDispatch } from "react-redux";
 import studentAction from "~/redux/action/actionStudent";
 import ModalViewStudent from "../Modal/ModalViewStudent";
-import { setWebpackOptimizationSplitChunks } from "customize-cra";
 
 const { Column } = Table;
 
-const TableStudent = () => {
+const TableStudent1 = () => {
   //redux
   const dispatch = useDispatch();
 
   const [listStudent, setListStudent] = useState([]);
   //view class info
   const [infoStudent, setInfoStudent] = useState({});
-  const [listIdClass, setListIdClass] = useState([]);
-
-  var optionClassFilter = {};
 
   //get details class to show
   useEffect(() => {
@@ -39,22 +35,6 @@ const TableStudent = () => {
       setListStudent(data.data);
     });
   }, [listStudent]);
-
-  useEffect(() => {
-    Axios.get("http://localhost:3001/class/getListId").then((data) => {
-      setListIdClass(data.data);
-    });
-  }, []);
-
-  var filterClass = {};
-
-  const optionClassFilterChoice = listIdClass.map((key, index) => {
-    filterClass.push({ text: key.id, value: key.id });
-  });
-
-  console.log("filterClass", filterClass);
-
-  // console.log("optionClassFilterChoice", optionClassFilterChoice);
 
   const data = [];
   listStudent.map((value, key) => {
@@ -116,99 +96,15 @@ const TableStudent = () => {
       });
     dispatch(studentAction.activeViewStudentModal(true));
   };
-
-  //data table
-
-  //sort table
-  const [filteredInfo, setFilteredInfo] = useState({});
-  const [sortedInfo, setSortedInfo] = useState({});
-
-  const handleChangeTable = (pagination, filters, sorter) => {
-    setFilteredInfo(filters);
-    setSortedInfo(sorter);
-  };
-
-  const clearFilters = () => {
-    setFilteredInfo({});
-    console.log("clear");
-  };
-
-  const clearAll = () => {
-    console.log("clear");
-    setFilteredInfo({});
-    setSortedInfo({});
-  };
-
-  const setAgeSort = () => {
-    console.log("clear");
-    setSortedInfo({
-      order: "descend",
-      columnKey: "age",
-    });
-  };
-
-  const columns = [
-    {
-      title: "ID",
-      dataIndex: "id",
-      key: "id",
-      sorter: (a, b) => a.name.length - b.name.length,
-      sortOrder: sortedInfo.columnKey === "id" ? sortedInfo.order : null,
-      ellipsis: true,
-    },
-    {
-      title: "Name",
-      dataIndex: "name",
-      key: "name",
-    },
-    {
-      title: "Age",
-      dataIndex: "age",
-      key: "age",
-      sorter: (a, b) => a.age - b.age,
-      sortOrder: sortedInfo.columnKey === "age" ? sortedInfo.order : null,
-      ellipsis: true,
-    },
-    {
-      title: "Email",
-      dataIndex: "email",
-      key: "email",
-    },
-    {
-      title: "Class",
-      dataIndex: "classID",
-      key: "classID",
-      filters: [{ ...filterClass }],
-      filteredValue: filteredInfo.sex || null,
-      onFilter: (value, record) => record.sex.includes(value),
-    },
-    {
-      title: "Sex",
-      dataIndex: "sex",
-      key: "sex",
-      filters: [
-        {
-          text: "Male",
-          value: "Male",
-        },
-        {
-          text: "Female",
-          value: "Female",
-        },
-      ],
-      filteredValue: filteredInfo.sex || null,
-      onFilter: (value, record) => record.sex.includes(value),
-    },
-  ];
   return (
     <div>
-      <Table dataSource={data} columns={columns} onChange={handleChangeTable}>
-        {/* <Column title="ID" dataIndex="id" key="id" />
+      <Table dataSource={data}>
+        <Column title="ID" dataIndex="id" key="id" />
         <Column title="Name" dataIndex="name" key="name" />
         <Column title="Age" dataIndex="age" key="age" />
         <Column title="Email" dataIndex="email" key="email" />
         <Column title="Class" dataIndex="classID" key="classID" />
-        <Column title="Sex" dataIndex="sex" key="sex" /> */}
+        <Column title="Sex" dataIndex="sex" key="sex" />
         <Column
           title="Action"
           key="action"
@@ -265,4 +161,4 @@ const TableStudent = () => {
   );
 };
 
-export default TableStudent;
+export default TableStudent1;

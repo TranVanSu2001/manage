@@ -22,13 +22,13 @@ const ModalAddStudent = () => {
 
   //redux
   const dispatch = useDispatch();
-  const classReducer = useSelector((state) => state.Student);
+  const studentReducer = useSelector((state) => state.Student);
 
   useEffect(() => {
     Axios.get("http://localhost:3001/class/getListId").then((data) => {
       setListIdClass(data.data);
     });
-  }, []);
+  }, [studentReducer.activeAddModal]);
 
   const listSex = ["Male", "Female"];
 
@@ -86,7 +86,7 @@ const ModalAddStudent = () => {
   return (
     <Modal
       title="Add student"
-      visible={classReducer.activeAddModal}
+      visible={studentReducer.activeAddModal}
       onOk={handleOk}
       onCancel={handleCancel}
       okText={"Add"}
